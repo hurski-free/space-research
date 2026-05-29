@@ -1,0 +1,29 @@
+export default {
+  main: {
+    title: 'Space research',
+    lead: 'Select game mode.',
+    supported: 'Supported:',
+    yes: 'yes',
+    no: 'no',
+    start: 'Start',
+    canvas2d: 'Canvas 2D',
+    webgl2: 'WebGL2',
+    language: 'Language',
+  },
+  game: {
+    back: 'Back',
+    modeCanvas2d: 'Canvas 2D',
+    modeWebgl2: 'WebGL2',
+    pauseResume: 'Pause / Resume (Space)',
+    stopStart: 'Stop / Start (Enter)',
+    restart: 'Restart',
+  },
+  blackHoleGame: {
+    score: 'Score: {score}',
+    stars: 'Stars: {count}',
+    blackHoles: 'Black holes: {count}',
+    particles: 'Particles: {count}',
+    particlesAbsorbedByBlackHoles: 'Particles absorbed by black holes: {count}',
+    blackHoleTimeRemains: 'Black hole time remains: {timeRemain}',
+  }
+};

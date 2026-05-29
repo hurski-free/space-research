@@ -1,0 +1,29 @@
+export default {
+  main: {
+    title: 'Space research',
+    lead: 'Выберите режим игры.',
+    supported: 'Поддержка:',
+    yes: 'да',
+    no: 'нет',
+    start: 'Начать',
+    canvas2d: 'Canvas 2D',
+    webgl2: 'WebGL2',
+    language: 'Язык',
+  },
+  game: {
+    back: 'Назад',
+    modeCanvas2d: 'Canvas 2D',
+    modeWebgl2: 'WebGL2',
+    pauseResume: 'Пауза / Продолжить (Пробел)',
+    stopStart: 'Стоп / Старт (Enter)',
+    restart: 'Перезапуск',
+  },
+  blackHoleGame: {
+    score: 'Очки: {score}',
+    stars: 'Звезды: {count}',
+    blackHoles: 'Чёрные дыры: {count}',
+    particles: 'Частицы: {count}',
+    particlesAbsorbedByBlackHoles: 'Частицы поглощены чёрными дырами: {count}',
+    blackHoleTimeRemains: 'Время до появления чёрной дыры: {timeRemain}',
+  }
+};
