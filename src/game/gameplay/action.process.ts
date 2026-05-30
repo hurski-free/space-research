@@ -12,13 +12,15 @@ export const pressedAction: ActionHandlerFun = (action, state) => {
 /**
  * Action must be executed only once after keyup
  */
-export const upAction: ActionHandlerFun = (action, state) => {
+export const upAction: ActionHandlerFun = (action, state) => {  
   if (!state) {
     if (action.pressed) {
       action.pressed = false;
       action.activated = true;
     }
   }
+
+  action.pressed = state;
 };
 
 export const resetActionsMap = (actionsMap: Map<KeyboardActions, IActionState>) => {

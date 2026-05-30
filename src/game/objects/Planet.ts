@@ -3,6 +3,7 @@ import { GameObject } from "./Object";
 
 export class Planet extends GameObject {
   readonly resources: Map<ResourceType, boolean>;
+  color: number[] = [0, 0, 0];
 
   constructor() {
     super();

@@ -5,11 +5,8 @@ import type { IGameplay } from "./gameplay/IGameplay";
 import type { IRender } from "./render/IRender";
 import { World } from "./world/World";
 import type { GameState } from "./GameSession";
+import type { ILevel } from "./level/ILevel";
 
-/**
- * non-optimized game class
- * For SoA just use number for indexes
- */
 export class Game {
   private readonly world: World;
   private readonly engine: IEngine;
@@ -17,6 +14,8 @@ export class Game {
   private readonly gameplay: IGameplay;
   private readonly frameView: IFrameView;
   private readonly gameSession: IGameSession;
+
+  private level!: ILevel;
 
   protected animationFrameId: number = 0;
   protected _prevTimestamp: DOMHighResTimeStamp = 0;
@@ -38,11 +37,14 @@ export class Game {
   }
 
   start() {
+    if (!this.level) {
+      throw new Error('Level is not set');
+    }
+
     if (this.gameSession.gameState === 0) {
       this.gameSession.gameState = 1;
 
-      this.frameView.camera[0] = -this.frameView.halfWidth;
-      this.frameView.camera[1] = -this.frameView.halfHeight;  
+      this.world.initLevel(this.level);
 
       this._prevTimestamp = performance.now();
       this.animationFrameId = requestAnimationFrame((now) => this.tick(now));
@@ -104,28 +106,27 @@ export class Game {
     this.start();
   }
 
-  resizeCanvas(width: number, height: number, cameraSet = false) {
+  resizeCanvas(width: number, height: number) {
     this.frameView.width = width;
     this.frameView.height = height;
     this.frameView.halfWidth = width / 2;
     this.frameView.halfHeight = height / 2;
 
-    if (cameraSet) {
-      this.frameView.camera[0] = -this.frameView.halfWidth;
-      this.frameView.camera[1] = -this.frameView.halfHeight;
-    }
-
     if (this.gameSession.gameState === 2) {
       this.renderer.render(this.world, this.frameView, this.gameSession);
     }
   }
 
-  cameraMove(deltaX: number, deltaY: number) {
-    this.frameView.camera[0] -= deltaX;
-    this.frameView.camera[1] -= deltaY;
-
-    if (this.gameSession.gameState === 2) {
-      this.renderer.render(this.world, this.frameView, this.gameSession);
-    }
+  setLevel(level: ILevel) {
+    this.level = level;
   }
+
+  // cameraMove(deltaX: number, deltaY: number) {
+  //   this.frameView.camera[0] -= deltaX;
+  //   this.frameView.camera[1] -= deltaY;
+
+  //   if (this.gameSession.gameState === 2) {
+  //     this.renderer.render(this.world, this.frameView, this.gameSession);
+  //   }
+  // }
 }

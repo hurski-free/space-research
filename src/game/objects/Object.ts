@@ -38,12 +38,16 @@ export class GameObject {
 
   x: number = 0;
   y: number = 0;
-
+  
   velocityX: number = 0;
   velocityY: number = 0;
-
+  
   accelerationX: number = 0;
   accelerationY: number = 0;
+  
+  angle: number = 0;
+  angularVelocity: number = 0;
+  angularAcceleration: number = 0;
 
   /**
    * Gravity impacting force is calculated as mass * common gravity constant
@@ -67,14 +71,18 @@ export class GameObject {
     this.velocityX += this.accelerationX;
     this.velocityY += this.accelerationY;
 
+    this.angularVelocity += this.angularAcceleration;
+
     this.x += this.velocityX;
     this.y += this.velocityY;
 
-    this.computeGravityImpactingForce();
+    this.angle += this.angularVelocity;
 
     this.state = OBJ_STATE_EXIST;
+
     this.accelerationX = 0;
     this.accelerationY = 0;
+    this.angularAcceleration = 0;
   }
 
   /**

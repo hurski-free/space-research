@@ -1,4 +1,8 @@
-export type KeyboardActions = 'main_engine' | 'maneur_left_engine' | 'maneur_right_engine' | 'scan' | 'stop_rotation';
+export type KeyboardActions = 'main_engine'
+  | 'maneur_left_engine'
+  | 'maneur_right_engine'
+  | 'scan'
+  | 'stop_rotation';
 
 export type KeysToActionsMap = Map<string, KeyboardActions>;
 

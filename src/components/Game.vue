@@ -3,7 +3,7 @@ import { ref, shallowRef, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { i18n } from '../i18n';
 
-import { type Game, createGame } from '../game';
+import { type Game, createGame, LEVELS } from '../game';
 
 const { t } = useI18n();
 
@@ -71,14 +71,13 @@ function initGame() {
     },
   });
 
-  setTimeout(() => {
-    gameRef.value = game;
-    game.resizeCanvas(canvas.width, canvas.height, true);
+  gameRef.value = game;
+  game.resizeCanvas(canvas.width, canvas.height);
 
-    if (props.autoStart) {
-      game.start();
-    }
-  }, 100);
+  if (props.autoStart) {
+    game.setLevel(LEVELS.level1);
+    game.start();
+  }
 }
 
 function togglePauseResume() {
@@ -136,7 +135,9 @@ onMounted(() => {
       resizeObserver.observe(rootRef.value);
     }
 
-    initGame();
+    setTimeout(() => {
+      initGame();
+    }, 500);
   });
 });
 
